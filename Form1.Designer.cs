@@ -37,20 +37,20 @@
             // 
             this.panel1.AutoScroll = true;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 279);
+            this.panel1.Location = new System.Drawing.Point(0, 171);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 171);
+            this.panel1.Size = new System.Drawing.Size(1000, 391);
             this.panel1.TabIndex = 0;
             // 
             // KeysCount
             // 
             this.KeysCount.Location = new System.Drawing.Point(24, 49);
-            this.KeysCount.Maximum = 88;
-            this.KeysCount.Minimum = 15;
+            this.KeysCount.Maximum = 150;
+            this.KeysCount.Minimum = 36;
             this.KeysCount.Name = "KeysCount";
             this.KeysCount.Size = new System.Drawing.Size(745, 56);
             this.KeysCount.TabIndex = 1;
-            this.KeysCount.Value = 15;
+            this.KeysCount.Value = 36;
             this.KeysCount.ValueChanged += new System.EventHandler(this.KeysCount_ValueChanged);
             // 
             // Form1

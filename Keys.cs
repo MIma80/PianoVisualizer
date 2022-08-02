@@ -42,8 +42,7 @@ namespace Piano
 
                 //size and location
                 blackKey.Size = new Size(this.blackKeyWidth, this.blackKeyHeight);
-                int B = (j * whiteKeyWidth) + blackKeyWidth / 2 + whiteKeyWidth / 2;
-                blackKey.Location = new Point(B, blackKey.Location.Y);
+                blackKey.Location = new Point((j * whiteKeyWidth) + blackKeyWidth / 2 + whiteKeyWidth / 2 + 15, blackKey.Location.Y);
 
                 //
                 panel.Controls.Add(blackKey);
@@ -62,8 +61,7 @@ namespace Piano
 
                 //size and location
                 whiteKey.Size = new Size(this.whiteKeyWidth, this.whiteKeyHeight);
-                int B = whiteKey.Location.X + (i * this.whiteKeyWidth);
-                whiteKey.Location = new Point(B, whiteKey.Location.Y);
+                whiteKey.Location = new Point(whiteKey.Location.X + (i * this.whiteKeyWidth) + 15, whiteKey.Location.Y);
 
                 //
                 panel.Controls.Add(whiteKey);

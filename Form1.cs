@@ -12,25 +12,27 @@ namespace Piano
 {
     public partial class Form1 : Form
     {
+        private Keys keys;
         public Form1()
         {
             InitializeComponent();
 
-            Keys keys = new Keys();
+            keys = new Keys();
+            keys.whiteKeyWidth = 36;
+            keys.whiteKeyHeight = 190;
 
+            keys.blackKeyWidth = keys.whiteKeyWidth / 2;
+            keys.blackKeyHeight = keys.whiteKeyHeight / 2;
             keys.CreateKeys(panel1);
         }
 
         private void KeysCount_ValueChanged(object sender, EventArgs e)
         {
             panel1.Controls.Clear();
-            Keys keys = new Keys();
 
-            keys.whiteKeyHeight = 120;
-            keys.whiteKeyWidth = 60;
-
+            keys.whiteKeyWidth = KeysCount.Value;
             keys.blackKeyWidth = keys.whiteKeyWidth / 2;
-            keys.blackKeyHeight = keys.whiteKeyHeight / 2;
+            keys.whiteKeyHeight = 200;
 
             keys.CreateKeys(panel1);
         }
