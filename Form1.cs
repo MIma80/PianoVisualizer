@@ -18,7 +18,7 @@ namespace Piano
 
             Keys keys = new Keys();
 
-            keys.CreateKeys(panel1, 10);
+            keys.CreateKeys(panel1);
         }
 
         private void KeysCount_ValueChanged(object sender, EventArgs e)
@@ -32,7 +32,7 @@ namespace Piano
             keys.blackKeyWidth = keys.whiteKeyWidth / 2;
             keys.blackKeyHeight = keys.whiteKeyHeight / 2;
 
-            keys.CreateKeys(panel1, KeysCount.Value);
+            keys.CreateKeys(panel1);
         }
     }
 }
