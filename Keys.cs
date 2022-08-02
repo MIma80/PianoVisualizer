@@ -23,6 +23,7 @@ namespace Piano
         {
             for (int i = 0, j = 0; i < 36; i++, j++)
             {
+                //skips unwanted black keys
                 if (blackKeysNotes[j % 7] == string.Empty)
                 {
                     i--;
@@ -30,30 +31,41 @@ namespace Piano
                 }
 
                 Button blackKey = new Button();
-                blackKey.Text = blackKeysNotes[j % 7];
-                blackKey.Name = blackKeysNotes[j % 7];
+                
+                //color
                 blackKey.BackColor = Color.Black;
                 blackKey.ForeColor = Color.White;
 
-                blackKey.Size = new Size(this.blackKeyWidth, this.blackKeyHeight);
 
+                blackKey.Text = blackKeysNotes[j % 7];
+                blackKey.Name = blackKeysNotes[j % 7];
+
+                //size and location
+                blackKey.Size = new Size(this.blackKeyWidth, this.blackKeyHeight);
                 int B = (j * whiteKeyWidth) + blackKeyWidth / 2 + whiteKeyWidth / 2;
                 blackKey.Location = new Point(B, blackKey.Location.Y);
 
+                //
                 panel.Controls.Add(blackKey);
             }
             for (int i = 0; i < 52; i++)
             {
                 Button whiteKey = new Button();
+                
+                //color
                 whiteKey.BackColor = Color.White;
                 whiteKey.ForeColor = Color.Black;
+
+                //name and text
                 whiteKey.Name = whiteKeysNotes[i % 7];
                 whiteKey.Text = whiteKeysNotes[i % 7];
 
+                //size and location
                 whiteKey.Size = new Size(this.whiteKeyWidth, this.whiteKeyHeight);
                 int B = whiteKey.Location.X + (i * this.whiteKeyWidth);
                 whiteKey.Location = new Point(B, whiteKey.Location.Y);
 
+                //
                 panel.Controls.Add(whiteKey);
             }
         }
