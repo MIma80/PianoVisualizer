@@ -17,24 +17,26 @@ namespace Piano
         {
             InitializeComponent();
 
-            keys = new Keys();
-            keys.whiteKeyWidth = 36;
-            keys.whiteKeyHeight = 190;
-
-            keys.blackKeyWidth = keys.whiteKeyWidth / 2;
-            keys.blackKeyHeight = keys.whiteKeyHeight / 2;
+            keys = new Keys(36, 200);
             keys.CreateKeys(panel1);
         }
 
         private void KeysCount_ValueChanged(object sender, EventArgs e)
         {
             panel1.Controls.Clear();
-
-            keys.whiteKeyWidth = KeysCount.Value;
-            keys.blackKeyWidth = keys.whiteKeyWidth / 2;
-            keys.whiteKeyHeight = 200;
-
+            keys = new Keys(KeysCount.Value, 200);
             keys.CreateKeys(panel1);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            var pic = sender as PictureBox;
+            pic.Location = new Point(pic.Location.X + 5, pic.Location.Y);
         }
     }
 }

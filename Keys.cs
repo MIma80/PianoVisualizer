@@ -16,6 +16,15 @@ namespace Piano
         public int whiteKeyWidth { get; set; }
         public int whiteKeyHeight { get; set; }
 
+        public Keys(int width, int height)
+        {
+            whiteKeyHeight = height;
+            whiteKeyWidth = width;
+
+            blackKeyWidth = whiteKeyWidth / 2;
+            blackKeyHeight = whiteKeyHeight / 2;
+        }
+
         private string[] whiteKeysNotes = { "C", "D", "E", "F", "G", "A", "B" };
         private string[] blackKeysNotes = { "C#", "D#", string.Empty, "F#", "G#", "A#", string.Empty };
 
@@ -31,18 +40,19 @@ namespace Piano
                 }
 
                 Button blackKey = new Button();
-                
+
                 //color
                 blackKey.BackColor = Color.Black;
                 blackKey.ForeColor = Color.White;
 
 
-                blackKey.Text = blackKeysNotes[j % 7];
-                blackKey.Name = blackKeysNotes[j % 7];
+                blackKey.Text = blackKeysNotes[j % 7] + (j / 7).ToString();
+                blackKey.Name = blackKeysNotes[j % 7] + (j / 7).ToString();
 
                 //size and location
                 blackKey.Size = new Size(this.blackKeyWidth, this.blackKeyHeight);
                 blackKey.Location = new Point((j * whiteKeyWidth) + blackKeyWidth / 2 + whiteKeyWidth / 2 + 15, blackKey.Location.Y);
+                blackKey.Click += foo;
 
                 //
                 panel.Controls.Add(blackKey);
@@ -50,22 +60,41 @@ namespace Piano
             for (int i = 0; i < 52; i++)
             {
                 Button whiteKey = new Button();
-                
+
                 //color
                 whiteKey.BackColor = Color.White;
                 whiteKey.ForeColor = Color.Black;
 
                 //name and text
-                whiteKey.Name = whiteKeysNotes[i % 7];
-                whiteKey.Text = whiteKeysNotes[i % 7];
+                whiteKey.Name = whiteKeysNotes[i % 7] + (i / 7).ToString();
+                whiteKey.Text = whiteKeysNotes[i % 7] + (i / 7).ToString();
 
                 //size and location
                 whiteKey.Size = new Size(this.whiteKeyWidth, this.whiteKeyHeight);
                 whiteKey.Location = new Point(whiteKey.Location.X + (i * this.whiteKeyWidth) + 15, whiteKey.Location.Y);
+                whiteKey.Click += foo;
 
                 //
                 panel.Controls.Add(whiteKey);
             }
+        }
+
+        public void foo(object sender, EventArgs e)
+        {
+            var btn = (Button)sender;
+            btn.BackColor = Color.Blue;
+
+            PictureBox pictureBox = new PictureBox();
+
+            pictureBox.Name = btn.Name;
+            pictureBox.Width = btn.Width;
+            pictureBox.Height = btn.Height;
+
+            pictureBox.Image = new Bitmap(pictureBox.Width, pictureBox.Height);
+            Graphics graphics = Graphics.FromImage(pictureBox.Image);
+            graphics.FillRectangle(Brushes.Green, 0, 0, pictureBox.Width, pictureBox.Height / 4);
+
+
         }
     }
 }
