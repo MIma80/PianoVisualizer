@@ -30,13 +30,22 @@ namespace Piano
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            panel1.Size = new Size(1000, 300);
+            timer1.Enabled = true;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            var pic = sender as PictureBox;
-            pic.Location = new Point(pic.Location.X + 5, pic.Location.Y);
+            foreach(Control c in panel1.Controls)
+            {
+                if(c.GetType() == typeof(PictureBox))
+                    c.Location = new Point(c.Location.X, c.Location.Y - 5);
+            }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

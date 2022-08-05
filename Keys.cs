@@ -51,8 +51,11 @@ namespace Piano
 
                 //size and location
                 blackKey.Size = new Size(this.blackKeyWidth, this.blackKeyHeight);
-                blackKey.Location = new Point((j * whiteKeyWidth) + blackKeyWidth / 2 + whiteKeyWidth / 2 + 15, blackKey.Location.Y);
-                blackKey.Click += foo;
+                blackKey.Location = new Point((j * whiteKeyWidth) + blackKeyWidth / 2 + whiteKeyWidth / 2 + 15, panel.Size.Height);
+
+
+                blackKey.MouseDown += (sender, e) => foo(sender, e, panel);
+                blackKey.MouseUp += backState;
 
                 //
                 panel.Controls.Add(blackKey);
@@ -71,15 +74,27 @@ namespace Piano
 
                 //size and location
                 whiteKey.Size = new Size(this.whiteKeyWidth, this.whiteKeyHeight);
-                whiteKey.Location = new Point(whiteKey.Location.X + (i * this.whiteKeyWidth) + 15, whiteKey.Location.Y);
-                whiteKey.Click += foo;
+                whiteKey.Location = new Point(whiteKey.Location.X + (i * this.whiteKeyWidth) + 15, panel.Size.Height);
+
+
+                whiteKey.MouseDown += (sender, e) => foo(sender, e, panel);
+                whiteKey.MouseUp += backState;
 
                 //
                 panel.Controls.Add(whiteKey);
             }
         }
 
-        public void foo(object sender, EventArgs e)
+        private void backState(object sender, EventArgs e)
+        {
+            var btn = (Button)sender;
+
+            if (btn.Name.Contains("#"))
+                btn.BackColor = Color.Black;
+            else btn.BackColor = Color.White;
+        }
+
+        public void foo(object sender, EventArgs e, Panel panel)
         {
             var btn = (Button)sender;
             btn.BackColor = Color.Blue;
@@ -89,12 +104,14 @@ namespace Piano
             pictureBox.Name = btn.Name;
             pictureBox.Width = btn.Width;
             pictureBox.Height = btn.Height;
+            pictureBox.Location = new Point(btn.Location.X, btn.Location.Y);
 
             pictureBox.Image = new Bitmap(pictureBox.Width, pictureBox.Height);
             Graphics graphics = Graphics.FromImage(pictureBox.Image);
-            graphics.FillRectangle(Brushes.Green, 0, 0, pictureBox.Width, pictureBox.Height / 4);
+            graphics.FillRectangle(Brushes.Green, 0, 0, pictureBox.Width, pictureBox.Height);
 
 
+            panel.Controls.Add(pictureBox);
         }
     }
 }
