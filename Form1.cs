@@ -12,37 +12,45 @@ namespace Piano
 {
     public partial class Form1 : Form
     {
-        private PianoKeys keys;
         public Form1()
         {
             InitializeComponent();
-
-            panel1.Controls.Clear();
-            keys = new PianoKeys(KeysCount.Value, 200);
-            keys.CreateKeys(panel1);
         }
-
-        private void KeysCount_ValueChanged(object sender, EventArgs e)
-        {
-            panel1.Controls.Clear();
-            keys = new PianoKeys(KeysCount.Value, 200);
-            keys.CreateKeys(panel1);
-        }
-
+        KeyBoard keyBoard;
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            keyBoard = new KeyBoard(36, 200, 52, panel1);
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void KeyPressedTimer_Tick(object sender, EventArgs e)
         {
-            foreach(Control c in panel1.Controls)
+            for (int i = 0; i < 52; i++)
             {
-                if(c.GetType() == typeof(PictureBox))
+                keyBoard.Keys[i].pictureBox.Image = new Bitmap(keyBoard.Keys[i].pictureBox.Width, keyBoard.Keys[i].pictureBox.Height);
+                Graphics graphics = Graphics.FromImage(keyBoard.Keys[i].pictureBox.Image);
+                if (keyBoard.Keys[i].Notes.Count > 0)
                 {
-                    if (c.Location.Y < 100)
-                        panel1.Controls.Remove(c);
-                    c.Location = new Point(c.Location.X, c.Location.Y - 5);
+                    for (int j = 0; j < keyBoard.Keys[i].Notes.Count; j++)
+                    {
+                        keyBoard.Keys[i].Notes[j].Move();
+                        graphics.FillRectangle(Brushes.Green, 0, keyBoard.Keys[i].pictureBox.Height - keyBoard.Keys[i].Notes[j].locationY, keyBoard.Keys[i].pictureBox.Width, keyBoard.Keys[i].Notes[j].scale);
+                        if(keyBoard.Keys[i].Notes[j].locationY - keyBoard.Keys[i].Notes[j].scale > keyBoard.Keys[i].pictureBox.Height)
+                        {
+                            keyBoard.Keys[i].Notes.Remove(keyBoard.Keys[i].Notes[j]);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void NoteTimer_Tick(object sender, EventArgs e)
+        {
+            foreach(var i in keyBoard.Keys)
+            {
+                foreach(var j in i.Notes)
+                {
+                    if (!j.isDone)
+                        j.Scale();
                 }
             }
         }

@@ -46,8 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Keys.cs" />
-    <Compile Include="PianoKeys.cs" />
+    <Compile Include="KeyBoard.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
