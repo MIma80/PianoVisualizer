@@ -37,10 +37,10 @@
             // panel1
             // 
             this.panel1.AutoScroll = true;
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 58);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(835, 459);
+            this.panel1.Size = new System.Drawing.Size(835, 517);
             this.panel1.TabIndex = 0;
             // 
             // KeyPressedTimer

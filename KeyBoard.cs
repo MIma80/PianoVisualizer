@@ -25,7 +25,7 @@ namespace Piano
         private string[] whiteKeysNotes = { "C", "D", "E", "F", "G", "A", "B" };
         private string[] blackKeysNotes = { "C#", "D#", string.Empty, "F#", "G#", "A#", string.Empty };
 
-        static private int speed = 5;
+        static private int speed = 10;
         static public int Speed
         {
             get { return speed; }
@@ -62,7 +62,7 @@ namespace Piano
             for (int i = 0; i < numberOfKeys; i++)
             {
                 Key key = new Key(widthOfKey, heightOfKey, i);
-                key.Name = whiteKeysNotes[i % 7] + (i / 7).ToString();
+                key.Name = whiteKeysNotes[i % 7] + ( (i / 7) + 1).ToString();
 
                 #region ButtonInit
                 key.button = new Button();
@@ -77,8 +77,8 @@ namespace Piano
                 #region PictureBoxInit
                 key.pictureBox = new PictureBox();
                 key.pictureBox.Name = key.Name;
-                key.pictureBox.Location = new Point(0 + (i * key.width) + 15, panel.Size.Height - key.height - 500);//TODO change height
-                key.pictureBox.Size = new Size(key.width, 500);//TODO change height
+                key.pictureBox.Location = new Point(0 + (i * key.width) + 15, 0);//TODO change height
+                key.pictureBox.Size = new Size(key.width, panel.Height - key.height);//TODO change height
                 #endregion
 
                 key.button.MouseDown += (sender, e) => MouseDownEvent(sender, e, key);

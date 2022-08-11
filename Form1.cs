@@ -19,7 +19,7 @@ namespace Piano
         KeyBoard keyBoard;
         private void Form1_Load(object sender, EventArgs e)
         {
-            keyBoard = new KeyBoard(36, 200, 52, panel1);
+            keyBoard = new KeyBoard(36, 250, 52, panel1);
         }
 
         private void KeyPressedTimer_Tick(object sender, EventArgs e)
