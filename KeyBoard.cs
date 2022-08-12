@@ -48,18 +48,19 @@ namespace Piano
         public class Key
         {
             public Button button;
-            public PictureBox pictureBox;
 
             public List<Note> Notes = new List<Note>();
 
             public string Name { get; internal set; }
             public int width { get; set; }
             public int height { get; set; }
+
             public class Note
             {
                 public bool isDone { get; set; } = false;
                 public int scale { get; private set; } = 0;
                 public int locationY { get; private set; } = 0;
+                
                 public void Move() { locationY += Speed; }
                 public void Scale() { scale += Speed; }
             }
@@ -71,7 +72,7 @@ namespace Piano
             }
         }
 
-        public KeyBoard(int widthOfKey, int heightOfKey, int numberOfKeys, Panel keyBoardPanel, Panel pictureBoxPanel)
+        public KeyBoard(int widthOfKey, int heightOfKey, int numberOfKeys, Panel keyBoardPanel)
         {
             for (int i = 0; i < numberOfKeys; i++)
             {
@@ -89,23 +90,14 @@ namespace Piano
                 key.button.AutoSize = true;
                 #endregion
 
-                #region PictureBoxInit
-                key.pictureBox = new PictureBox();
-                key.pictureBox.BackColor = Color.LightGray;
-                key.pictureBox.Name = key.Name;
-                key.pictureBox.Location = new Point(key.button.Location.X, 0);//TODO change height
-                key.pictureBox.Size = new Size(key.width, pictureBoxPanel.Height);//TODO change height
-                #endregion
-
                 key.button.MouseDown += (sender, e) => MouseDownEvent(sender, e, key);
                 key.button.MouseUp += (sender, e) => MouseUpEvent(sender, e, key);
 
-                //key.button.MouseEnter += (sender, e) => MouseEnterEvent(sender, e, key);
-                //key.button.MouseLeave += (sender, e) => MouseLeaveEvent(sender, e, key);
+                key.button.MouseEnter += (sender, e) => MouseEnterEvent(sender, e, key);
+                key.button.MouseLeave += (sender, e) => MouseLeaveEvent(sender, e, key);
 
                 Keys.Add(key);
             }
-            pictureBoxPanel.Controls.AddRange(Keys.Select(x => x.pictureBox).ToArray());
             keyBoardPanel.Controls.AddRange(Keys.Select(x => x.button).ToArray());
         }
     }

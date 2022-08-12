@@ -32,7 +32,8 @@
             this.keyBoardPanel = new System.Windows.Forms.Panel();
             this.KeyPressedTimer = new System.Windows.Forms.Timer(this.components);
             this.NoteTimer = new System.Windows.Forms.Timer(this.components);
-            this.pictureBoxPanel = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // keyBoardPanel
@@ -56,23 +57,24 @@
             this.NoteTimer.Interval = 10;
             this.NoteTimer.Tick += new System.EventHandler(this.NoteTimer_Tick);
             // 
-            // pictureBoxPanel
+            // pictureBox1
             // 
-            this.pictureBoxPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pictureBoxPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pictureBoxPanel.Location = new System.Drawing.Point(0, -403);
-            this.pictureBoxPanel.Name = "pictureBoxPanel";
-            this.pictureBoxPanel.Size = new System.Drawing.Size(835, 700);
-            this.pictureBoxPanel.TabIndex = 1;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(835, 412);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(835, 517);
-            this.Controls.Add(this.pictureBoxPanel);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.keyBoardPanel);
             this.Name = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -82,7 +84,7 @@
         public System.Windows.Forms.Panel keyBoardPanel;
         private System.Windows.Forms.Timer KeyPressedTimer;
         private System.Windows.Forms.Timer NoteTimer;
-        private System.Windows.Forms.Panel pictureBoxPanel;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

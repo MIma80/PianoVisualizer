@@ -22,22 +22,23 @@ namespace Piano
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            keyBoard = new KeyBoard(37, 220, 52, keyBoardPanel, pictureBoxPanel);
+            keyBoard = new KeyBoard(37, 220, 52, keyBoardPanel);
+            pictureBox1.Height = 1080 - 220;
         }
 
         private void KeyPressedTimer_Tick(object sender, EventArgs e)
         {
+            pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            graphics = Graphics.FromImage(pictureBox1.Image);
             for (int i = 0; i < 52; i++)
             {
-                keyBoard.Keys[i].pictureBox.Image = new Bitmap(keyBoard.Keys[i].pictureBox.Width, keyBoard.Keys[i].pictureBox.Height);
-                graphics = Graphics.FromImage(keyBoard.Keys[i].pictureBox.Image);
                 if (keyBoard.Keys[i].Notes.Count > 0)
                 {
                     for (int j = 0; j < keyBoard.Keys[i].Notes.Count; j++)
                     {
                         keyBoard.Keys[i].Notes[j].Move();
-                        graphics.FillRectangle(Brushes.Green, 0, keyBoard.Keys[i].pictureBox.Height - keyBoard.Keys[i].Notes[j].locationY, keyBoard.Keys[i].pictureBox.Width, keyBoard.Keys[i].Notes[j].scale);
-                        if(keyBoard.Keys[i].Notes[j].locationY - keyBoard.Keys[i].Notes[j].scale > keyBoard.Keys[i].pictureBox.Height)
+                        graphics.FillRectangle(Brushes.Green, keyBoard.Keys[i].button.Location.X, pictureBox1.Height - keyBoard.Keys[i].Notes[j].locationY, keyBoard.Keys[i].button.Width, keyBoard.Keys[i].Notes[j].scale);
+                        if(keyBoard.Keys[i].Notes[j].locationY - keyBoard.Keys[i].Notes[j].scale > 1000 && keyBoard.Keys[i].Notes.Last().locationY - keyBoard.Keys[i].Notes.Last().scale > 1000)
                         {
                             keyBoard.Keys[i].Notes.Remove(keyBoard.Keys[i].Notes[j]);
                         }
