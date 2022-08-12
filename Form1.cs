@@ -24,12 +24,13 @@ namespace Piano
         {
             keyBoard = new KeyBoard(37, 220, 52, keyBoardPanel);
             pictureBox1.Height = 1080 - 220;
+            pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            graphics = Graphics.FromImage(pictureBox1.Image);
         }
 
         private void KeyPressedTimer_Tick(object sender, EventArgs e)
         {
-            pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            graphics = Graphics.FromImage(pictureBox1.Image);
+            graphics.Clear(Color.LightGray);
             for (int i = 0; i < 52; i++)
             {
                 if (keyBoard.Keys[i].Notes.Count > 0)
@@ -45,6 +46,7 @@ namespace Piano
                     }
                 }
             }
+            pictureBox1.Refresh();
         }
 
         private void NoteTimer_Tick(object sender, EventArgs e)
