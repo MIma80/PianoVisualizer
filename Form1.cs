@@ -12,14 +12,17 @@ namespace Piano
 {
     public partial class Form1 : Form
     {
+        KeyBoard keyBoard;
+        Graphics graphics;
+
+
         public Form1()
         {
             InitializeComponent();
         }
-        KeyBoard keyBoard;
         private void Form1_Load(object sender, EventArgs e)
         {
-            keyBoard = new KeyBoard(36, 250, 52, panel1);
+            keyBoard = new KeyBoard(37, 220, 52, keyBoardPanel, pictureBoxPanel);
         }
 
         private void KeyPressedTimer_Tick(object sender, EventArgs e)
@@ -27,7 +30,7 @@ namespace Piano
             for (int i = 0; i < 52; i++)
             {
                 keyBoard.Keys[i].pictureBox.Image = new Bitmap(keyBoard.Keys[i].pictureBox.Width, keyBoard.Keys[i].pictureBox.Height);
-                Graphics graphics = Graphics.FromImage(keyBoard.Keys[i].pictureBox.Image);
+                graphics = Graphics.FromImage(keyBoard.Keys[i].pictureBox.Image);
                 if (keyBoard.Keys[i].Notes.Count > 0)
                 {
                     for (int j = 0; j < keyBoard.Keys[i].Notes.Count; j++)
@@ -53,6 +56,11 @@ namespace Piano
                         j.Scale();
                 }
             }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

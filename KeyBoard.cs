@@ -12,16 +12,30 @@ namespace Piano
     internal class KeyBoard
     {
         public List<Key> Keys = new List<Key>();
+        #region MouseEvents
+        #region Leave and Enter events
+        private void MouseEnterEvent(object sender, EventArgs e, Key key)
+        {
+            key.Notes.Add(new Key.Note());
+        }
+        private void MouseLeaveEvent(object sender, EventArgs e, Key key)
+        {
+            key.Notes.Last().isDone = true;
+        }
+        #endregion
+
+        #region Down and Up events
         private void MouseDownEvent(object sender, MouseEventArgs e, Key key)
         {
             key.Notes.Add(new Key.Note());
         }
-
         private void MouseUpEvent(object sender, MouseEventArgs e, Key key)
         {
             key.Notes.Last().isDone = true;
         }
-        
+        #endregion
+        #endregion
+
         private string[] whiteKeysNotes = { "C", "D", "E", "F", "G", "A", "B" };
         private string[] blackKeysNotes = { "C#", "D#", string.Empty, "F#", "G#", "A#", string.Empty };
 
@@ -57,7 +71,7 @@ namespace Piano
             }
         }
 
-        public KeyBoard(int widthOfKey, int heightOfKey, int numberOfKeys, Panel panel)
+        public KeyBoard(int widthOfKey, int heightOfKey, int numberOfKeys, Panel keyBoardPanel, Panel pictureBoxPanel)
         {
             for (int i = 0; i < numberOfKeys; i++)
             {
@@ -71,23 +85,28 @@ namespace Piano
                 key.button.Name = key.Name;
                 key.button.Text = key.Name;
                 key.button.Size = new Size(key.width, key.height);
-                key.button.Location = new Point(0 + (i * key.width) + 15, panel.Size.Height - key.height);
+                key.button.Location = new Point(0 + (i * key.width), 0);
+                key.button.AutoSize = true;
                 #endregion
 
                 #region PictureBoxInit
                 key.pictureBox = new PictureBox();
+                key.pictureBox.BackColor = Color.LightGray;
                 key.pictureBox.Name = key.Name;
-                key.pictureBox.Location = new Point(0 + (i * key.width) + 15, 0);//TODO change height
-                key.pictureBox.Size = new Size(key.width, panel.Height - key.height);//TODO change height
+                key.pictureBox.Location = new Point(key.button.Location.X, 0);//TODO change height
+                key.pictureBox.Size = new Size(key.width, pictureBoxPanel.Height);//TODO change height
                 #endregion
 
                 key.button.MouseDown += (sender, e) => MouseDownEvent(sender, e, key);
                 key.button.MouseUp += (sender, e) => MouseUpEvent(sender, e, key);
 
-                panel.Controls.Add(key.pictureBox);
-                panel.Controls.Add(key.button);
+                //key.button.MouseEnter += (sender, e) => MouseEnterEvent(sender, e, key);
+                //key.button.MouseLeave += (sender, e) => MouseLeaveEvent(sender, e, key);
+
                 Keys.Add(key);
             }
+            pictureBoxPanel.Controls.AddRange(Keys.Select(x => x.pictureBox).ToArray());
+            keyBoardPanel.Controls.AddRange(Keys.Select(x => x.button).ToArray());
         }
     }
 }
