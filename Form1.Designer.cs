@@ -39,9 +39,9 @@
             // keyBoardPanel
             // 
             this.keyBoardPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.keyBoardPanel.Location = new System.Drawing.Point(0, 297);
+            this.keyBoardPanel.Location = new System.Drawing.Point(0, 302);
             this.keyBoardPanel.Name = "keyBoardPanel";
-            this.keyBoardPanel.Size = new System.Drawing.Size(835, 220);
+            this.keyBoardPanel.Size = new System.Drawing.Size(888, 220);
             this.keyBoardPanel.TabIndex = 0;
             this.keyBoardPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -62,13 +62,14 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(835, 412);
+            this.pictureBox1.Size = new System.Drawing.Size(888, 412);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(835, 517);
+            this.ClientSize = new System.Drawing.Size(888, 522);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.keyBoardPanel);
             this.Name = "Form1";
